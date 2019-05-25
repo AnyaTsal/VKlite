@@ -1,0 +1,24 @@
+<resources>
+    <string name="write_message" translatable="false">Write message</string>
+    <string name="send" translatable="false">SEND</string>
+    <string name="enter_message_hint" translatable="false">Enter message</string>
+    <string name="app_name" translatable="false">VK lite</string>
+    <integer name="com_vk_sdk_AppId">6928035</integer>
+    <string name="login" translatable="false">Login</string>
+    <string name="friends" translatable="false">Friends</string>
+    <string name="groups" translatable="false">Groups</string>
+    <string name="news" translatable="false">News</string>
+    <string name="menu" translatable="false">Menu</string>
+    <string name="create_message" translatable="false">Create message</string>
+    <string name="internet_connection_error_message" translatable="false">Some problems with Internet connection. Check your internet connection and try to log in again.</string>
+    <string name="internet_connection_error_title" translatable="false">Internet connection error</string>
+    <string name="delete" translatable="false">Delete</string>
+    <string name="blacklist" translatable="false">Black list</string>
+    <string name="birthday" translatable="false">Birthday:</string>
+    <string name="city" translatable="false">City:</string>
+    <string name="phone_number" translatable="false">Phone number:</string>
+    <string name="user_profile" translatable="false">Profile</string>
+    <string name="followers" translatable="false">Followers:</string>
+    <string name="messages" translatable="false">Messages</string>
+    <string name="page" translatable="false">page</string>
+</resources>
