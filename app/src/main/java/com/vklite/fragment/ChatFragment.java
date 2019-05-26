@@ -27,7 +27,7 @@ import com.vklite.R;
 import com.vklite.model.Util;
 import com.vklite.model.Message;
 import com.vklite.model.User;
-import com.vklite.views.adapter.UserChatAdapter;
+import com.vklite.views.adapter.ChatAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +48,7 @@ public class ChatFragment extends Fragment {
     private RequestQueue requestQueue;
     private RecyclerView messagesRecyclerView;
     private ArrayList<Message> dialogMessages;
-    private UserChatAdapter userChatAdapter;
+    private ChatAdapter chatAdapter;
     private LinearLayoutManager linearLayoutManager;
 
     private User currentUserID;
@@ -79,12 +79,12 @@ public class ChatFragment extends Fragment {
         currentUserID = (User) getArguments().getSerializable(CURRENT_USER_ID);
         currentUserIdDialogWith = (User) getArguments().getSerializable(CURRENT_USER_ID_DIALOG_WITH);
 
-        getMessageHistoryVK();
+        getMessageHistory();
 
-        userChatAdapter = new UserChatAdapter(context, dialogMessages, currentUserID);
+        chatAdapter = new ChatAdapter(context, dialogMessages, currentUserID);
 
         messagesRecyclerView = view.findViewById(R.id.recyclerview_message_list);
-        messagesRecyclerView.setAdapter(userChatAdapter);
+        messagesRecyclerView.setAdapter(chatAdapter);
         ((MainActivity)getActivity()).setToolbar(currentUserIdDialogWith.getName());
 
         linearLayoutManager = new LinearLayoutManager(context);
@@ -132,14 +132,14 @@ public class ChatFragment extends Fragment {
                     if (messagesOffset < countOfMessages) {
                         messagesOffset += 20;
 
-                        getMessageHistoryVK();
+                        getMessageHistory();
                     }
                 }
             }
         });
     }
 
-    void getMessageHistoryVK() {
+    void getMessageHistory() {
         VKRequest vkRequest = new VKRequest("messages.getHistory",
                 VKParameters.from(
                         VKApiConst.OFFSET, messagesOffset,
@@ -153,7 +153,7 @@ public class ChatFragment extends Fragment {
                     JSONObject responseVK = response.json.getJSONObject("response");
                     countOfMessages = responseVK.getInt("count");
                     JSONArray messages = responseVK.getJSONArray("items");
-                    dialogMessages.addAll(0, parseVKMessages(messages));
+                    dialogMessages.addAll(0, parseMessages(messages));
                     messagesRecyclerView.getAdapter().notifyDataSetChanged();
                     linearLayoutManager.scrollToPositionWithOffset(20, 0);
 
@@ -164,7 +164,7 @@ public class ChatFragment extends Fragment {
         });
     }
 
-    private ArrayList<Message> parseVKMessages(JSONArray messagesJSONArray) {
+    private ArrayList<Message> parseMessages(JSONArray messagesJSONArray) {
         ArrayList<Message> messages = new ArrayList<>();
         try {
             for (int i = 0; i < messagesJSONArray.length(); i++) {
@@ -247,7 +247,7 @@ public class ChatFragment extends Fragment {
                         Message message = getMessageThatSentUserInDialog(messages);
                         if (message != null) {
                             dialogMessages.add(message);
-                            userChatAdapter.notifyItemChanged(dialogMessages.size() - 1);
+                            chatAdapter.notifyItemChanged(dialogMessages.size() - 1);
                             linearLayoutManager.scrollToPosition(dialogMessages.size() - 1);
                         }
                     }

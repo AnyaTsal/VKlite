@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     Toolbar toolbar;
-    FragmentTransaction fragmentTransaction;
     BottomNavigationView navigation;
 
     public void setToolbar(String toolbar) {
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void loadFragment(Fragment fragment) {
-        fragmentTransaction = getSupportFragmentManager()
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content, fragment)
                 .addToBackStack(null)

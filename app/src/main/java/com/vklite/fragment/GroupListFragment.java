@@ -42,11 +42,6 @@ public class GroupListFragment extends ListFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         List<GroupItem> groupItems = new ArrayList<>();
 

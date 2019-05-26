@@ -29,18 +29,18 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
     private List<NewsItem> newsItemList;
     private Context context;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView postAuthorImage;
-        public TextView postAuthorName;
-        public TextView postData;
-        public TextView postText;
-        public TextView postLikes;
-        public TextView postComments;
-        public TextView postReposts;
-        public ImageView likesImage;
-        public RecyclerView recyclerViewImages;
-        public RecyclerView recyclerViewLinks;
-        public View v;
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        ImageView postAuthorImage;
+        TextView postAuthorName;
+        TextView postData;
+        TextView postText;
+        TextView postLikes;
+        TextView postComments;
+        TextView postReposts;
+        ImageView likesImage;
+        RecyclerView recyclerViewImages;
+        RecyclerView recyclerViewLinks;
+        View v;
 
         MyViewHolder(View view) {
             super(view);

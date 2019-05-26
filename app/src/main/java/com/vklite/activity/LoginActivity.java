@@ -15,7 +15,7 @@ import com.vklite.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private String[] vkScope = {
+    private String[] scope = {
             VKScope.MESSAGES,
             VKScope.GROUPS,
             VKScope.NOTIFY,
@@ -57,6 +57,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginAction() {
-        VKSdk.login(this, vkScope);
+        VKSdk.login(this, scope);
     }
 }

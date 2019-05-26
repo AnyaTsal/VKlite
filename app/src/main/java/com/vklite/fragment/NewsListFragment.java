@@ -1,6 +1,5 @@
 package com.vklite.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,9 +13,9 @@ import android.view.ViewGroup;
 import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
-import com.vklite.model.Fragments;
-import com.vklite.activity.MainActivity;
 import com.vklite.R;
+import com.vklite.activity.MainActivity;
+import com.vklite.model.Fragments;
 import com.vklite.model.NewsItem;
 import com.vklite.views.DividerItemView;
 import com.vklite.views.adapter.NewsListAdapter;
@@ -31,10 +30,7 @@ import java.util.List;
 public class NewsListFragment extends Fragment {
 
     NewsListAdapter adapter;
-    RecyclerView recyclerView;
     List<NewsItem> newsItemList;
-    RecyclerView.LayoutManager layoutManager;
-    Context context;
     String startFrom = null;
 
     public NewsListFragment() {
@@ -48,7 +44,6 @@ public class NewsListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        context = getContext();
     }
 
     @Override
@@ -60,13 +55,13 @@ public class NewsListFragment extends Fragment {
 
         ((MainActivity)getActivity()).setToolbar(Fragments.NEWS);
 
-        recyclerView = view.findViewById(R.id.list_news);
+        RecyclerView recyclerView = view.findViewById(R.id.list_news);
         recyclerView.addItemDecoration(new DividerItemView(getActivity()));
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new NewsListAdapter(context, newsItemList);
+        adapter = new NewsListAdapter(getContext(), newsItemList);
         recyclerView.setAdapter(adapter);
         getNews();
 
@@ -104,12 +99,12 @@ public class NewsListFragment extends Fragment {
         });
     }
 
-    ArrayList<NewsItem> parseNews(JSONObject responseVK) {
+    ArrayList<NewsItem> parseNews(JSONObject response) {
         ArrayList<NewsItem> newsList = new ArrayList<>();
         try {
-            JSONArray items = responseVK.getJSONArray("items");
-            JSONArray profiles = responseVK.getJSONArray("profiles");
-            JSONArray groups = responseVK.getJSONArray("groups");
+            JSONArray items = response.getJSONArray("items");
+            JSONArray profiles = response.getJSONArray("profiles");
+            JSONArray groups = response.getJSONArray("groups");
 
             for (int i = 0; i < items.length(); i++) {
                 try {

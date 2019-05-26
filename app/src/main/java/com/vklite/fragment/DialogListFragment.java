@@ -67,11 +67,6 @@ public class DialogListFragment extends ListFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ListView listView = getListView();
@@ -89,7 +84,7 @@ public class DialogListFragment extends ListFragment {
                     if (preLast != lastItem) {
                         if (dialogOffset < dialogsCount) {
                             dialogOffset += 15;
-                            getVKDialogs();
+                            getDialogs();
                         }
                         preLast = lastItem;
                     }
@@ -113,13 +108,13 @@ public class DialogListFragment extends ListFragment {
         setListAdapter(adapter);
 
         view = inflater.inflate(R.layout.fragment_messages, container, false);
-        getVKDialogs();
+        getDialogs();
         setUpLongPullServer();
 
         return view;
     }
 
-    private void getVKDialogs() {
+    private void getDialogs() {
         VKRequest request = new VKRequest("messages.getConversations",
                 VKParameters.from("extended", 1,
                         "count", 15,

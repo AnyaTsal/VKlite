@@ -16,17 +16,17 @@ import com.vklite.model.User;
 
 import java.util.List;
 
-public class UserChatAdapter extends RecyclerView.Adapter {
+public class ChatAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
 
     private User currentUser;
-    private Context mContext;
+    private Context context;
     private List<Message> messages;
 
-    public UserChatAdapter(Context context, List<Message> messageList, User currentUser) {
-        mContext = context;
-        messages = messageList;
+    public ChatAdapter(Context context, List<Message> messageList, User currentUser) {
+        this.context = context;
+        this.messages = messageList;
         this.currentUser = currentUser;
     }
 
@@ -106,7 +106,7 @@ public class UserChatAdapter extends RecyclerView.Adapter {
         void bind(Message message) {
             timeText.setText(message.getTime());
             messageText.setText(message.getMessage());
-            Picasso.with(mContext)
+            Picasso.with(context)
                     .load(message.getSender().getImageURL())
                     .error(R.drawable.placeholder_person)
                     .placeholder(R.drawable.placeholder_person)
